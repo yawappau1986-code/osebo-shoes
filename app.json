@@ -21,9 +21,7 @@
       "favicon": "./assets/favicon.png",
       "name": "JFAMCO",
       "shortName": "JFAMCO",
-      "description": "Johnny's Food And Meat Complex — Fresh, Quality Meat",
-      "bundler": "metro",
-      "output": "static"
+      "description": "Johnny's Food And Meat Complex — Fresh, Quality Meat"
     }
   }
 }
