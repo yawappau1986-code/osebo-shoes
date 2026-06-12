@@ -1190,17 +1190,14 @@ export default function App() {
     );
   }
 
-  const MIN_CARD = 150;
-  const GAP = 4;
-  const PADDING = 4;
+  const MIN_CARD = 160;
+  const GAP = 8;
+  const PADDING = 8;
 
   const availableWidth = width - (PADDING * 2);
-  const columnCount = Math.max(1, Math.min(
-    Math.floor((availableWidth + GAP) / (MIN_CARD + GAP)),
-    4  // cap at 4 columns max
-  ));
+  const columnCount = 2; // hardcoded — always 2 columns
   const cardWidth = (availableWidth - (GAP * (columnCount - 1))) / columnCount;
-  const isCompactCard = cardWidth < 200; // compact mode when cards are narrow
+  const isCompactCard = cardWidth < 200;
   const isCompactAdmin = width < 760;
   const isPhoneScreen = width < 600;
   const isMobileOrTablet = width <= 1400;
@@ -1916,7 +1913,7 @@ export default function App() {
           />
         </View>
 
-        <View style={[styles.productGrid, { paddingHorizontal: 4, rowGap: 4, columnGap: 4 }]}>
+        <View style={[styles.productGrid, { paddingHorizontal: 8, rowGap: 8, columnGap: 8 }]}>
           {categoriesError ? (
             <Text style={{color: 'red', textAlign: 'center', width: '100%', marginBottom: 16, fontWeight: 'bold'}}>{categoriesError}</Text>
           ) : null}
