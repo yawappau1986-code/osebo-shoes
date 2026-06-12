@@ -1174,9 +1174,9 @@ export default function App() {
     );
   }
 
-  const columnCount = width >= 980 ? 3 : width >= 640 ? 2 : 1;
-  const gap = 14;
-  const horizontalPadding = 32;
+  const columnCount = width >= 980 ? 3 : width >= 320 ? 2 : 1;
+  const gap = 10;
+  const horizontalPadding = width < 400 ? 16 : 32;
   const cardWidth = (width - horizontalPadding - gap * (columnCount - 1)) / columnCount;
   const isCompactAdmin = width < 760;
   const isPhoneScreen = width < 600;
