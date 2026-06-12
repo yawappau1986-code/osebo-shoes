@@ -1427,12 +1427,14 @@ export default function App() {
             ) : customerOrders.length > 0 ? (
               customerOrders.map(order => (
                 <View key={order.id} style={{flexDirection: 'column', paddingVertical: 14, borderBottomWidth: 1, borderBottomColor: 'rgba(0,0,0,0.05)'}}>
-                  <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-                    <View>
-                      <Text style={{fontWeight: '700', color: palette.text}}>Order {order.id}</Text>
-                      <Text style={{fontSize: 12, color: palette.secondary, marginTop: 4}}>{new Date(order.created_at).toLocaleDateString()} at {new Date(order.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</Text>
+                  <View style={{flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', gap: 8}}>
+                    <View style={{flex: 1}}>
+                      <Text style={{fontWeight: '700', color: palette.charcoal, fontSize: 11}} numberOfLines={1} ellipsizeMode="tail">
+                        Order #{String(order.id).slice(0, 8).toUpperCase()}...
+                      </Text>
+                      <Text style={{fontSize: 11, color: palette.secondary, marginTop: 2}}>{new Date(order.created_at).toLocaleDateString()} at {new Date(order.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</Text>
                     </View>
-                    <View style={{alignItems: 'flex-end'}}>
+                    <View style={{alignItems: 'flex-end', flexShrink: 0}}>
                       <Text style={{fontWeight: '700', color: palette.oxblood}}>{formatCurrency(order.total)}</Text>
                       <View style={{backgroundColor: order.status === 'Pending' ? '#FDE68A' : order.status === 'Processing' ? '#93C5FD' : order.status === 'Delivered' ? '#86EFAC' : '#E5E7EB', paddingHorizontal: 8, paddingVertical: 2, borderRadius: 10, marginTop: 4}}>
                         <Text style={{fontSize: 10, fontWeight: '700', color: '#1F2937'}}>{String(order.status).toUpperCase()}</Text>
