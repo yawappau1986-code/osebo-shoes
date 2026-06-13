@@ -1150,18 +1150,18 @@ export default function App() {
 
     // --- Sync to Supabase: refresh session first, then update ---
     try {
-      // 1. Ensure we have a valid session
+      // 1. Ensure a valid JWT session
       let { data: { session } } = await supabase.auth.getSession();
       if (!session) {
         const { data: refreshData } = await supabase.auth.refreshSession();
         session = refreshData?.session;
       }
       if (!session) {
-        alert('Admin session expired. Please sign out and sign back in to save changes to the database.');
+        alert('Admin session expired. Sign out and back in to save changes to the database.');
         return;
       }
 
-      // 2. Push update to Supabase
+      // 2. Push update
       const { error } = await supabase
         .from('products')
         .update(updatedFields)
@@ -1169,7 +1169,7 @@ export default function App() {
 
       if (error) throw error;
 
-      // 3. Verify the update landed by fetching the row back
+      // 3. Verify it landed
       const { data: verified } = await supabase
         .from('products')
         .select('id, name')
@@ -1177,10 +1177,10 @@ export default function App() {
         .single();
 
       if (verified) {
-        console.log('✅ Supabase confirmed update for:', verified.name);
-        loadSupabaseData(); // full refresh
+        console.log('✅ Supabase confirmed update:', verified.name);
+        loadSupabaseData();
       } else {
-        alert('Saved locally. Supabase did not confirm the update — your admin session may have expired. Please sign out and back in.');
+        alert('Saved locally. Supabase did not confirm the update — please sign out and back in as admin.');
       }
     } catch (err) {
       console.warn('Supabase update failed:', err.message);
