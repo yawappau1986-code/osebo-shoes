@@ -3520,8 +3520,8 @@ const styles = StyleSheet.create({
   },
   cartIconSquare: {
     position: 'absolute',
-    top: 8,
-    left: 8,
+    bottom: 8,
+    right: 8,
     backgroundColor: '#FFFFFF',
     width: 36,
     height: 36,

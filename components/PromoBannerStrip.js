@@ -34,12 +34,18 @@ export default function PromoBannerStrip({ onBannerPress }) {
   const [loading, setLoading] = useState(true);
   const { width } = useWindowDimensions();
   
+  // Detect phone vs desktop/tablet
+  const isPhone = width < 768;
+  
   // Calculate card width to fill the row with equal spacing
   const numCards = 3; // Number of cards visible at once
   const horizontalPadding = 32; // 16px on each side
   const cardGap = 12; // Gap between cards
   const totalGaps = (numCards - 1) * cardGap;
   const cardWidth = (width - horizontalPadding - totalGaps) / numCards;
+  
+  // Reduced height for phone
+  const cardHeight = isPhone ? 160 : 220;
 
   useEffect(() => {
     fetchPromoBanners();
@@ -67,9 +73,9 @@ export default function PromoBannerStrip({ onBannerPress }) {
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
-        <View style={[styles.skeletonCard, { width: cardWidth }]} />
-        <View style={[styles.skeletonCard, { width: cardWidth }]} />
-        <View style={[styles.skeletonCard, { width: cardWidth }]} />
+        <View style={[styles.skeletonCard, { width: cardWidth, height: cardHeight }]} />
+        <View style={[styles.skeletonCard, { width: cardWidth, height: cardHeight }]} />
+        <View style={[styles.skeletonCard, { width: cardWidth, height: cardHeight }]} />
       </View>
     );
   }
@@ -89,7 +95,7 @@ export default function PromoBannerStrip({ onBannerPress }) {
         {banners.map((banner) => (
           <Pressable
             key={banner.id}
-            style={[styles.bannerCard, { width: cardWidth }]}
+            style={[styles.bannerCard, { width: cardWidth, height: cardHeight }]}
             onPress={() => onBannerPress?.(banner)}
             accessibilityRole="button"
             accessibilityLabel={`${banner.promo_label}: ${banner.title}`}
@@ -116,16 +122,16 @@ export default function PromoBannerStrip({ onBannerPress }) {
 
             {/* Text Content */}
             <View style={styles.textContent}>
-              <Text style={styles.bannerTitle} numberOfLines={2}>
+              <Text style={[styles.bannerTitle, isPhone && styles.bannerTitlePhone]} numberOfLines={2}>
                 {banner.title}
               </Text>
               {banner.subtitle && (
-                <Text style={styles.bannerSubtitle} numberOfLines={2}>
+                <Text style={[styles.bannerSubtitle, isPhone && styles.bannerSubtitlePhone]} numberOfLines={2}>
                   {banner.subtitle}
                 </Text>
               )}
               {banner.discount_percentage > 0 && (
-                <Text style={styles.discountText}>
+                <Text style={[styles.discountText, isPhone && styles.discountTextPhone]}>
                   {banner.discount_percentage}% OFF
                 </Text>
               )}
@@ -149,8 +155,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   skeletonCard: {
-    // width is set dynamically via inline style
-    height: 220,
+    // width and height are set dynamically via inline style
     borderRadius: 12,
     backgroundColor: '#E5E7EB',
   },
@@ -159,8 +164,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   bannerCard: {
-    // width is set dynamically via inline style
-    height: 220,
+    // width and height are set dynamically via inline style
     borderRadius: 12,
     overflow: 'hidden',
     backgroundColor: '#1B1C1C',
@@ -213,16 +217,29 @@ const styles = StyleSheet.create({
     marginBottom: 4,
     letterSpacing: 0.3,
   },
+  bannerTitlePhone: {
+    fontSize: 13,
+    marginBottom: 2,
+  },
   bannerSubtitle: {
     fontSize: 12,
     color: 'rgba(255,255,255,0.85)',
     lineHeight: 16,
     marginBottom: 4,
   },
+  bannerSubtitlePhone: {
+    fontSize: 10,
+    lineHeight: 14,
+    marginBottom: 2,
+  },
   discountText: {
     fontSize: 14,
     fontWeight: '700',
     color: '#FFD700',
     marginTop: 4,
+  },
+  discountTextPhone: {
+    fontSize: 12,
+    marginTop: 2,
   },
 });
