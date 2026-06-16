@@ -175,7 +175,7 @@ WHERE email = 'jafancoadmin@gmail.com';
 - For production, consider enabling RLS with proper policies
 - Store admin credentials securely (use password manager)
 - Consider adding 2FA for admin accounts in production
-- The trigger automatically assigns admin role only to `jafancoadmin@gmail.com`
+- The trigger automatically assigns admin role only to `admin@example.com`
 
 ## 📚 Related Files
 

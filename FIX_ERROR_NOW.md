@@ -14,7 +14,7 @@ GET https://...supabase.co/rest/v1/profiles?... 406 (Not Acceptable)
 ## ✅ Quick Fix (5 Minutes)
 
 ### Step 1: Open Supabase
-1. Go to: https://hxkhlexajostqthptvaw.supabase.co
+1. Go to: https://your-project-id.supabase.co
 2. Sign in if needed
 3. Click **"SQL Editor"** in left sidebar
 

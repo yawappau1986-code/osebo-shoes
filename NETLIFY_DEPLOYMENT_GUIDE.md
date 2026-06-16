@@ -71,7 +71,7 @@ This is the **CRITICAL STEP** - Adding your secrets!
 4. Add:
    ```
    Key: SUPABASE_URL
-   Value: https://hxkhlexajostqthptvaw.supabase.co
+   Value: https://your-project-id.supabase.co
    
    Key: SUPABASE_ANON_KEY
    Value: (your actual anon key)
@@ -87,7 +87,7 @@ This is the **CRITICAL STEP** - Adding your secrets!
 5. Add each variable:
    - **Variable 1:**
      - Key: `SUPABASE_URL`
-     - Value: `https://hxkhlexajostqthptvaw.supabase.co`
+     - Value: `https://your-project-id.supabase.co`
    - **Variable 2:**
      - Key: `SUPABASE_ANON_KEY`
      - Value: (your actual key from Supabase)
@@ -161,7 +161,7 @@ Netlify should auto-detect Expo, but verify:
 ### On Your Computer
 ```env
 # .env file (local development)
-SUPABASE_URL=https://hxkhlexajostqthptvaw.supabase.co
+SUPABASE_URL=https://your-project-id.supabase.co
 SUPABASE_ANON_KEY=your-key-here
 ```
 
@@ -171,8 +171,8 @@ Environment Variables in Netlify Dashboard:
 ┌─────────────────────┬────────────────────────────────┐
 │ Key                 │ Value                          │
 ├─────────────────────┼────────────────────────────────┤
-│ SUPABASE_URL        │ https://hxkhlexajostqthptvaw...│
-│ SUPABASE_ANON_KEY   │ eyJhbGciOiJIUzI1NiIsInR5cCI... │
+│ SUPABASE_URL        │ https://your-project-id...│
+│ SUPABASE_ANON_KEY   │ your-supabase-anon-key... │
 └─────────────────────┴────────────────────────────────┘
 ```
 

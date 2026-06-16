@@ -257,8 +257,8 @@ Site Settings → Environment Variables
 ┌─────────────────────┬──────────────────────────────┐
 │ Key                 │ Value                        │
 ├─────────────────────┼──────────────────────────────┤
-│ SUPABASE_URL        │ https://hxkhlexajostqthp...  │
-│ SUPABASE_ANON_KEY   │ eyJhbGciOiJIUzI1NiIsInR...  │
+│ SUPABASE_URL        │ https://your-project-id...  │
+│ SUPABASE_ANON_KEY   │ your-supabase-anon-key...  │
 └─────────────────────┴──────────────────────────────┘
 ```
 

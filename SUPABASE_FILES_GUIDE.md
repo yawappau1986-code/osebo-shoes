@@ -145,7 +145,7 @@ Your Computer                          Supabase Cloud
 1. Open `.env` file on your computer
 2. Add Supabase URL and API key:
 ```env
-SUPABASE_URL=https://hxkhlexajostqthptvaw.supabase.co
+SUPABASE_URL=https://your-project-id.supabase.co
 SUPABASE_ANON_KEY=your-key-here
 ```
 3. Save the file

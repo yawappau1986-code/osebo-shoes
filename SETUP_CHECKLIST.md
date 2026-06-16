@@ -10,7 +10,7 @@
 ## 🚀 Database Setup (DO THIS NOW)
 
 ### [ ] Task 1: Create Profiles Table
-1. [ ] Open Supabase Dashboard: https://hxkhlexajostqthptvaw.supabase.co
+1. [ ] Open Supabase Dashboard: https://your-project-id.supabase.co
 2. [ ] Navigate to **SQL Editor**
 3. [ ] Open file: `create_profiles_table.sql`
 4. [ ] Copy all SQL content
@@ -79,7 +79,7 @@ WHERE email = 'jafancoadmin@gmail.com';
 1. [ ] Open your app
 2. [ ] Click **"Sign In"** (bottom navbar, user icon)
 3. [ ] Enter credentials:
-   - Email: `jafancoadmin@gmail.com`
+   - Email: `admin@example.com`
    - Password: (your password)
 4. [ ] Click **"Sign In"**
 5. [ ] **Expected**: Redirects to Admin Dashboard ✅

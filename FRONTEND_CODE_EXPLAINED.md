@@ -214,7 +214,7 @@ export const supabase = createClient(supabaseUrl, supabaseKey);
 **Purpose:** Database credentials
 
 ```env
-SUPABASE_URL=https://hxkhlexajostqthptvaw.supabase.co
+SUPABASE_URL=https://your-project-id.supabase.co
 SUPABASE_ANON_KEY=your-key-here
 ```
 

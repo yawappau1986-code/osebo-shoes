@@ -30,13 +30,13 @@
 **File**: `.env`
 
 ```env
-EXPO_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imh4a2hsZXhham9zdHF0aHB0dmF3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzMDk4NjgsImV4cCI6MjA5Njg4NTg2OH0.XxaTYL9DaIDhJnnHjfn5S_uPd7_oSU6EuaDd0KmOlC4
-EXPO_PUBLIC_SUPABASE_URL=https://hxkhlexajostqthptvaw.supabase.co
+EXPO_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key-here
+EXPO_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
 ```
 
 **Your Project Details**:
-- **URL**: `https://hxkhlexajostqthptvaw.supabase.co`
-- **Project Ref**: `hxkhlexajostqthptvaw`
+- **URL**: `https://your-project-id.supabase.co`
+- **Project Ref**: `your-project-id`
 - **Region**: (Check your Supabase dashboard)
 
 ---

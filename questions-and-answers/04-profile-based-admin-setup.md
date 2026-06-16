@@ -93,7 +93,7 @@ jafancoadmin@gmail.com  | admin | 2026-06-14 10:30:00
 1. Open the app
 2. Click "Sign In" in bottom navbar
 3. Enter credentials:
-   - Email: `jafancoadmin@gmail.com`
+   - Email: `admin@example.com`
    - Password: (your password)
 4. Should redirect to **Admin Dashboard** ✅
 
