@@ -281,7 +281,7 @@ const formatMoney = (amount, currency = 'GHC') => {
 const fallbackFooterSections = [
   {
     section_key: 'aboutUs',
-    title: 'ABOUT JFAMCO',
+    title: 'ABOUT OSEBO-SHOES',
     footer_items: [
       { id: 'f1', label: 'We specialize in the distribution of a wide range of quality products, proudly made in Ghana.', action_type: 'text', sort_order: 10 },
       { id: 'f2', label: 'Whether you\'re a household, restaurant, caterer, retailer, or food service provider, we offer professional support and consistent supply to meet your needs.', action_type: 'text', sort_order: 20 }
@@ -292,8 +292,8 @@ const fallbackFooterSections = [
     title: 'MAIN MENU',
     footer_items: [
       { id: 'f4', label: 'Home', action_type: 'navigate', action_value: 'shop', sort_order: 10 },
-      { id: 'f5', label: 'About Us', action_type: 'alert', action_value: 'About JFAMCO coming soon', sort_order: 20 },
-      { id: 'f6', label: 'JFAMCO Shop', action_type: 'navigate', action_value: 'shop', sort_order: 30 },
+      { id: 'f5', label: 'About Us', action_type: 'alert', action_value: 'About Osebo-Shoes coming soon', sort_order: 20 },
+      { id: 'f6', label: 'Osebo-Shoes Shop', action_type: 'navigate', action_value: 'shop', sort_order: 30 },
       { id: 'f7', label: 'Contact Us', action_type: 'alert', action_value: 'Contact Us coming soon', sort_order: 40 }
     ]
   },
@@ -1018,7 +1018,7 @@ const fetchFooterData = async () => {
         });
         if (error) throw error;
         setAuthModalVisible(false);
-        alert('Welcome to JFAMCO! Your account has been created.');
+        alert('Welcome to Osebo-Shoes! Your account has been created.');
       }
     } catch (err) {
       alert(err.message);
@@ -1757,7 +1757,7 @@ const fetchFooterData = async () => {
           <View style={{ width: '100%', maxWidth: 420, backgroundColor: '#fff', borderTopWidth: 4, borderTopColor: palette.oxblood, padding: 36, shadowColor: '#000', shadowOffset: {width: 0, height: 8}, shadowOpacity: 0.08, shadowRadius: 24 }}>
 
             {/* Logo / Brand */}
-            <Text style={{ fontSize: 11, fontWeight: '700', letterSpacing: 3, color: palette.oxblood, marginBottom: 8 }}>JFAMCO</Text>
+            <Text style={{ fontSize: 11, fontWeight: '700', letterSpacing: 3, color: palette.oxblood, marginBottom: 8 }}>OSEBO-SHOES</Text>
             <Text style={{ fontFamily: 'Georgia', fontSize: 28, fontWeight: '700', color: palette.charcoal, marginBottom: 4 }}>Admin Login</Text>
             <Text style={{ fontSize: 13, color: palette.secondary, marginBottom: 32, lineHeight: 20 }}>Sign in with your admin account to access the dashboard.</Text>
 
@@ -1807,7 +1807,7 @@ const fetchFooterData = async () => {
         <View style={styles.adminDashboardLayout}>
           {/* SIDEBAR */}
           <View style={[styles.adminSidebar, isCompactAdmin && { display: 'none' }]}>
-            <Text style={styles.adminSidebarBrand}>JFAMCO</Text>
+            <Text style={styles.adminSidebarBrand}>OSEBO-SHOES</Text>
             
             <View style={styles.adminProfileBlock}>
               <Pressable onPress={() => { setTempAvatarUrl(adminAvatarUrl); setAdminProfileModalVisible(true); }}>
@@ -2105,7 +2105,7 @@ const fetchFooterData = async () => {
           />
           <View style={styles.heroOverlay} />
           <Animated.View style={[styles.heroTextWrap, { opacity: reveal, transform: [{ translateY: lift }] }]}>
-            <Text style={styles.kicker}>JFAMCO</Text>
+            <Text style={styles.kicker}>OSEBO-SHOES</Text>
             <Text style={styles.heroTitle}>Quality Products,{`\n`}Delivered Fresh.</Text>
             <Text style={styles.heroBody}>
               Transparency in sourcing. Excellence in quality. The definitive collection for
@@ -2992,7 +2992,7 @@ const fetchFooterData = async () => {
                 <Text style={{ fontSize: 24, color: palette.charcoal, fontWeight: '300' }}>✕</Text>
               </Pressable>
               <Text style={{ fontFamily: 'Georgia', fontSize: 32, fontWeight: '700', color: palette.oxblood, marginLeft: 36, lineHeight: 34 }}>
-                JFAMCO
+                OSEBO-SHOES
               </Text>
             </View>
 
@@ -3002,7 +3002,7 @@ const fetchFooterData = async () => {
                 {isLoginMode ? 'Welcome Back' : 'Create an Account'}
               </Text>
               <Text style={{ fontSize: 13, color: palette.secondary, marginTop: 6, lineHeight: 18 }}>
-                {isLoginMode ? 'Sign in to access your orders and account.' : 'Join JFAMCO for a seamless shopping experience.'}
+                {isLoginMode ? 'Sign in to access your orders and account.' : 'Join Osebo-Shoes for a seamless shopping experience.'}
               </Text>
             </View>
 
