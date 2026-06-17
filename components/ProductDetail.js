@@ -411,7 +411,7 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart, 
                   return;
                 }
                 
-                // Check if item is already in cart
+                // Check if item is already in cart (for display message only)
                 const existingCartItem = cartItems.find(
                   (item) => item.id === product.id && item.selectedWeight === (product.hasWeights ? selectedWeight : 'unit')
                 );
@@ -422,13 +422,9 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart, 
                   image: product.image || product.product_images?.[0]?.url || product.product_images?.[0]?.image_url || 'https://via.placeholder.com/600x600?text=No+Image'
                 };
                 
-                if (existingCartItem) {
-                  // Item exists in cart - SET quantity (don't add)
-                  onSetCartQuantity?.(productWithImage, product.hasWeights ? selectedWeight : 'unit', currentPrice, quantity);
-                } else {
-                  // Item doesn't exist - ADD to cart
-                  onAddToCart?.(productWithImage, product.hasWeights ? selectedWeight : 'unit', currentPrice, quantity);
-                }
+                // ALWAYS use setCartQuantity - SET the quantity to what's displayed
+                // Never add to existing - always replace with the displayed quantity
+                onSetCartQuantity?.(productWithImage, product.hasWeights ? selectedWeight : 'unit', currentPrice, quantity);
                 
                 // Show success feedback
                 Alert.alert(
