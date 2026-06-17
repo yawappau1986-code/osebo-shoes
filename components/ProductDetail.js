@@ -1,4 +1,4 @@
-import React, { useState, useRef, useMemo } from 'react';
+import React, { useState, useRef, useMemo, useEffect } from 'react';
 import {
   View,
   Text,
@@ -34,6 +34,17 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart }
   const [selectedWeight, setSelectedWeight] = useState('US 9');
   const [showQuantityControls, setShowQuantityControls] = useState(false);
   const scrollViewRef = useRef(null);
+
+  // Reset state when product changes or modal opens/closes
+  useEffect(() => {
+    if (visible && product) {
+      // Reset to initial state when opening modal with a product
+      setShowQuantityControls(false);
+      setQuantity(1);
+      setSelectedImageIndex(0);
+      setSelectedWeight('US 9');
+    }
+  }, [visible, product?.id]); // Reset when visibility changes or product ID changes
 
   // Calculate current price based on weight selection - MUST be before early return
   const currentPrice = useMemo(() => {
@@ -368,9 +379,7 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart }
                   return;
                 }
                 onAddToCart?.(product, product.hasWeights ? selectedWeight : 'unit', currentPrice, quantity);
-                setShowQuantityControls(false); // Reset for next time
-                setQuantity(1); // Reset quantity
-                onClose();
+                onClose(); // useEffect will reset state when modal closes
               }}
               disabled={!showQuantityControls || product.stock_quantity === 0}
             >
