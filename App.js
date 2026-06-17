@@ -1505,6 +1505,43 @@ const fetchFooterData = async () => {
     });
   };
 
+  const setCartQuantity = (category, selectedWeight, itemPrice, qty) => {
+    const priceNum = Number(itemPrice);
+    const quantityToSet = Number(qty) || 1;
+    
+    setCartItems((currentItems) => {
+      const existingItemIndex = currentItems.findIndex(
+        (item) => item.id === category.id && item.selectedWeight === selectedWeight
+      );
+
+      if (existingItemIndex >= 0) {
+        // Item exists - SET the quantity (don't add)
+        return currentItems.map((item, idx) => {
+          if (idx !== existingItemIndex) return item;
+          return {
+            ...item,
+            quantity: quantityToSet,
+            lineTotal: +(item.unitPrice * quantityToSet).toFixed(2),
+          };
+        });
+      }
+
+      // Item doesn't exist - add it
+      return [
+        ...currentItems,
+        {
+          id: category.id,
+          name: category.name,
+          image: category.image,
+          selectedWeight,
+          unitPrice: priceNum,
+          quantity: quantityToSet,
+          lineTotal: +(priceNum * quantityToSet).toFixed(2),
+        },
+      ];
+    });
+  };
+
   const removeFromCart = (categoryId, selectedWeight) => {
     setCartItems((currentItems) =>
       currentItems.filter(
@@ -3275,6 +3312,9 @@ const fetchFooterData = async () => {
         }}
         onAddToCart={(product, selectedWeight, itemPrice, quantity) => {
           addToCart(product, selectedWeight, itemPrice, quantity);
+        }}
+        onSetCartQuantity={(product, selectedWeight, itemPrice, quantity) => {
+          setCartQuantity(product, selectedWeight, itemPrice, quantity);
         }}
         cartItems={cartItems}
       />

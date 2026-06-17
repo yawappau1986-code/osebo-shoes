@@ -27,7 +27,7 @@ const palette = {
   vault: '#202222',
 };
 
-export default function ProductDetail({ product, visible, onClose, onAddToCart, cartItems = [] }) {
+export default function ProductDetail({ product, visible, onClose, onAddToCart, onSetCartQuantity, cartItems = [] }) {
   const { width, height } = useWindowDimensions();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -422,7 +422,13 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart, 
                   image: product.image || product.product_images?.[0]?.url || product.product_images?.[0]?.image_url || 'https://via.placeholder.com/600x600?text=No+Image'
                 };
                 
-                onAddToCart?.(productWithImage, product.hasWeights ? selectedWeight : 'unit', currentPrice, quantity);
+                if (existingCartItem) {
+                  // Item exists in cart - SET quantity (don't add)
+                  onSetCartQuantity?.(productWithImage, product.hasWeights ? selectedWeight : 'unit', currentPrice, quantity);
+                } else {
+                  // Item doesn't exist - ADD to cart
+                  onAddToCart?.(productWithImage, product.hasWeights ? selectedWeight : 'unit', currentPrice, quantity);
+                }
                 
                 // Show success feedback
                 Alert.alert(
