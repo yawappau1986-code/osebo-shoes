@@ -32,6 +32,7 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart }
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
   const [selectedWeight, setSelectedWeight] = useState('US 9');
+  const [showQuantityControls, setShowQuantityControls] = useState(false);
   const scrollViewRef = useRef(null);
 
   // Calculate current price based on weight selection - MUST be before early return
@@ -118,6 +119,15 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart }
     if (quantity > 1) {
       setQuantity(prev => prev - 1);
     }
+  };
+
+  const handleAddToCartClick = () => {
+    if (!product.stock_quantity || product.stock_quantity === 0) {
+      Alert.alert('Out of Stock', 'This product is currently unavailable');
+      return;
+    }
+    setShowQuantityControls(true);
+    setQuantity(1); // Start with quantity 1
   };
 
   return (
@@ -286,22 +296,44 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart }
               {/* Quantity Selection */}
               <View style={styles.quantityContainer}>
                 <Text style={styles.sectionTitle}>Quantity</Text>
-                <View style={styles.quantityControls}>
-                  <Pressable 
-                    onPress={decrementQuantity} 
-                    style={[styles.quantityButton, quantity <= 1 && styles.quantityButtonDisabled]}
-                    disabled={quantity <= 1}
+                
+                {!showQuantityControls ? (
+                  /* Add to Cart Button - Shows initially */
+                  <Pressable
+                    style={[
+                      styles.initialAddToCartButton,
+                      (!product.stock_quantity || product.stock_quantity === 0) && styles.initialAddToCartButtonDisabled
+                    ]}
+                    onPress={handleAddToCartClick}
+                    disabled={!product.stock_quantity || product.stock_quantity === 0}
                   >
-                    <FontAwesome name="minus" size={16} color={quantity <= 1 ? '#CCC' : palette.charcoal} />
+                    <FontAwesome name="shopping-cart" size={18} color="#FFF" />
+                    <Text style={styles.initialAddToCartText}>
+                      {(!product.stock_quantity || product.stock_quantity === 0) 
+                        ? 'Out of Stock' 
+                        : 'Add to Cart'}
+                    </Text>
                   </Pressable>
-                  <Text style={styles.quantityText}>{quantity}</Text>
-                  <Pressable 
-                    onPress={incrementQuantity} 
-                    style={styles.quantityButton}
-                  >
-                    <FontAwesome name="plus" size={16} color={palette.charcoal} />
-                  </Pressable>
-                </View>
+                ) : (
+                  /* Quantity Controls - Shows after clicking Add to Cart */
+                  <View style={styles.quantityControls}>
+                    <Pressable 
+                      onPress={decrementQuantity} 
+                      style={[styles.quantityButton, quantity <= 1 && styles.quantityButtonDisabled]}
+                      disabled={quantity <= 1}
+                    >
+                      <FontAwesome name="minus" size={16} color={quantity <= 1 ? '#CCC' : palette.charcoal} />
+                    </Pressable>
+                    <Text style={styles.quantityText}>{quantity}</Text>
+                    <Pressable 
+                      onPress={incrementQuantity} 
+                      style={styles.quantityButton}
+                    >
+                      <FontAwesome name="plus" size={16} color={palette.charcoal} />
+                    </Pressable>
+                  </View>
+                )}
+                
                 {product.stock_quantity !== undefined && (
                   <Text style={styles.stockInfo}>
                     {product.stock_quantity > 0 
@@ -324,23 +356,31 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart }
             <Pressable
               style={[
                 styles.addToCartButton,
-                (!product.stock_quantity || product.stock_quantity === 0) && styles.addToCartButtonDisabled
+                (!showQuantityControls || !product.stock_quantity || product.stock_quantity === 0) && styles.addToCartButtonDisabled
               ]}
               onPress={() => {
+                if (!showQuantityControls) {
+                  Alert.alert('Select Quantity', 'Please click "Add to Cart" button first to select quantity');
+                  return;
+                }
                 if (!product.stock_quantity || product.stock_quantity === 0) {
                   Alert.alert('Out of Stock', 'This product is currently unavailable');
                   return;
                 }
                 onAddToCart?.(product, product.hasWeights ? selectedWeight : 'unit', currentPrice, quantity);
+                setShowQuantityControls(false); // Reset for next time
+                setQuantity(1); // Reset quantity
                 onClose();
               }}
-              disabled={!product.stock_quantity || product.stock_quantity === 0}
+              disabled={!showQuantityControls || !product.stock_quantity || product.stock_quantity === 0}
             >
               <FontAwesome name="shopping-cart" size={20} color="#FFF" />
               <Text style={styles.addToCartText}>
                 {(!product.stock_quantity || product.stock_quantity === 0) 
                   ? 'Out of Stock' 
-                  : `Add ${quantity} to Cart • GHC ${totalPrice.toFixed(2)}`}
+                  : showQuantityControls 
+                    ? `Add ${quantity} to Cart • GHC ${totalPrice.toFixed(2)}`
+                    : 'Select Quantity First'}
               </Text>
             </Pressable>
           </View>
@@ -560,6 +600,25 @@ const styles = StyleSheet.create({
   },
   quantityContainer: {
     marginBottom: 20,
+  },
+  initialAddToCartButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: palette.oxblood,
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 8,
+    marginTop: 8,
+    gap: 8,
+  },
+  initialAddToCartButtonDisabled: {
+    backgroundColor: '#CCC',
+  },
+  initialAddToCartText: {
+    color: '#FFF',
+    fontSize: 16,
+    fontWeight: '600',
   },
   quantityControls: {
     flexDirection: 'row',
