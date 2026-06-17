@@ -12,8 +12,10 @@
     "expo-blur": "~56.0.3",
     "expo-status-bar": "~56.0.4",
     "is-fullwidth-code-point": "^5.1.0",
+    "leaflet": "^1.9.4",
     "react": "^19.2.7",
     "react-dom": "^19.2.3",
+    "react-leaflet": "^5.0.0",
     "react-native": "0.85.3",
     "react-native-web": "^0.21.2",
     "resolve-from": "^5.0.0"

@@ -997,6 +997,11 @@
     "@jridgewell/resolve-uri" "^3.1.0"
     "@jridgewell/sourcemap-codec" "^1.4.14"
 
+"@react-leaflet/core@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.npmjs.org/@react-leaflet/core/-/core-3.0.0.tgz"
+  integrity sha512-3EWmekh4Nz+pGcr+xjf0KNyYfC3U2JjnkWsh0zcqaexYqmmB5ZhH37kz41JXGmKzpaMZCnPofBBm64i+YrEvGQ==
+
 "@react-native-async-storage/async-storage@^2.2.0":
   version "2.2.0"
   resolved "https://registry.npmjs.org/@react-native-async-storage/async-storage/-/async-storage-2.2.0.tgz"
@@ -2272,6 +2277,11 @@ lan-network@^0.2.1:
   resolved "https://registry.npmjs.org/lan-network/-/lan-network-0.2.1.tgz"
   integrity sha512-ONPnazC96VKDntab9j9JKwIWhZ4ZUceB4A9Epu4Ssg0hYFmtHZSeQ+n15nIwTFmcBUKtExOer8WTJ4GF9MO64A==
 
+leaflet@^1.9.4:
+  version "1.9.4"
+  resolved "https://registry.npmjs.org/leaflet/-/leaflet-1.9.4.tgz"
+  integrity sha512-nxS1ynzJOmOlHp+iL3FyWqK89GtNL8U8rvlMOsQdTTssxZwCXh8N2NB3GDQOL+YR3XnWyZAxwQixURb+FA74PA==
+
 leven@^3.1.0:
   version "3.1.0"
   resolved "https://registry.npmjs.org/leven/-/leven-3.1.0.tgz"
@@ -2915,6 +2925,13 @@ react-is@^18.0.0:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react-is/-/react-is-18.3.1.tgz"
   integrity sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==
+
+react-leaflet@^5.0.0:
+  version "5.0.0"
+  resolved "https://registry.npmjs.org/react-leaflet/-/react-leaflet-5.0.0.tgz"
+  integrity sha512-CWbTpr5vcHw5bt9i4zSlPEVQdTVcML390TjeDG0cK59z1ylexpqC6M1PJFjV8jD7CF+ACBFsLIDs6DRMoLEofw==
+  dependencies:
+    "@react-leaflet/core" "^3.0.0"
 
 react-native-web@^0.21.2:
   version "0.21.2"

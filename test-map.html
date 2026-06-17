@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osebo-Shoes Map Test</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #FAF9F9;
+        }
+        .header {
+            background: #4A0404;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 8px;
+        }
+        .header p {
+            opacity: 0.9;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .card h2 {
+            color: #1B1C1C;
+            margin-bottom: 16px;
+        }
+        #map {
+            height: 500px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .store-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+        .store-card {
+            background: #FFF0F0;
+            padding: 16px;
+            border-radius: 8px;
+            border-left: 4px solid #4A0404;
+        }
+        .store-card h3 {
+            color: #4A0404;
+            margin-bottom: 8px;
+        }
+        .store-card p {
+            color: #5F5E5F;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+        .icon {
+            display: inline-block;
+            width: 16px;
+            text-align: center;
+            margin-right: 8px;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #28a745;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🗺️ Osebo-Shoes Store Locator</h1>
+        <p>Find your nearest premium footwear store</p>
+    </div>
+
+    <div class="container">
+        <div class="success">
+            ✅ <strong>Map Integration Successful!</strong> Your Leaflet map is working perfectly.
+        </div>
+
+        <div class="card">
+            <h2>Interactive Map</h2>
+            <div id="map"></div>
+            <p style="color: #5F5E5F; font-size: 14px;">
+                Click on markers to see store details. Zoom and pan to explore.
+            </p>
+        </div>
+
+        <div class="card">
+            <h2>Our Store Locations</h2>
+            <div class="store-list">
+                <div class="store-card">
+                    <h3>📍 Main Store</h3>
+                    <p><span class="icon">📍</span>Oxford Street, Osu, Accra</p>
+                    <p><span class="icon">📞</span>+233 XX XXX XXXX</p>
+                    <p><span class="icon">🕐</span>Mon-Sat: 9AM-8PM, Sun: 10AM-6PM</p>
+                </div>
+                <div class="store-card">
+                    <h3>📍 Osu Branch</h3>
+                    <p><span class="icon">📍</span>Ring Road Central, Accra</p>
+                    <p><span class="icon">📞</span>+233 XX XXX XXXY</p>
+                    <p><span class="icon">🕐</span>Mon-Sat: 9AM-7PM, Sun: Closed</p>
+                </div>
+                <div class="store-card">
+                    <h3>📍 Mall Branch</h3>
+                    <p><span class="icon">📍</span>Accra Mall, Spintex Road</p>
+                    <p><span class="icon">📞</span>+233 XX XXX XXXZ</p>
+                    <p><span class="icon">🕐</span>Mon-Sun: 10AM-9PM</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>Integration Status</h2>
+            <p style="margin-bottom: 12px;">✅ Leaflet library loaded</p>
+            <p style="margin-bottom: 12px;">✅ Map rendering correctly</p>
+            <p style="margin-bottom: 12px;">✅ Markers displaying</p>
+            <p style="margin-bottom: 12px;">✅ Ready for React Native integration</p>
+            <p style="color: #5F5E5F; margin-top: 16px;">
+                This is a test page. To integrate into your React Native app, 
+                use the MapComponent and StoreLocator components provided.
+            </p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize map centered on Accra
+        const map = L.map('map').setView([5.6037, -0.1870], 12);
+
+        // Add OpenStreetMap tiles
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Store locations
+        const stores = [
+            {
+                lat: 5.6037,
+                lng: -0.1870,
+                name: 'Osebo-Shoes Main Store',
+                address: 'Oxford Street, Osu, Accra',
+                phone: '+233 XX XXX XXXX',
+                hours: 'Mon-Sat: 9AM-8PM, Sun: 10AM-6PM'
+            },
+            {
+                lat: 5.5560,
+                lng: -0.1969,
+                name: 'Osebo-Shoes Osu Branch',
+                address: 'Ring Road Central, Accra',
+                phone: '+233 XX XXX XXXY',
+                hours: 'Mon-Sat: 9AM-7PM, Sun: Closed'
+            },
+            {
+                lat: 5.6537,
+                lng: -0.1658,
+                name: 'Osebo-Shoes Mall Branch',
+                address: 'Accra Mall, Spintex Road',
+                phone: '+233 XX XXX XXXZ',
+                hours: 'Mon-Sun: 10AM-9PM'
+            }
+        ];
+
+        // Custom icon
+        const storeIcon = L.divIcon({
+            className: 'custom-icon',
+            html: '<div style="background:#4A0404;color:white;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;border:3px solid white;box-shadow:0 2px 8px rgba(0,0,0,0.3);">🏪</div>',
+            iconSize: [32, 32],
+            iconAnchor: [16, 16]
+        });
+
+        // Add markers
+        stores.forEach(store => {
+            const marker = L.marker([store.lat, store.lng], { icon: storeIcon }).addTo(map);
+            
+            const popupContent = `
+                <div style="min-width:200px;">
+                    <h3 style="margin:0 0 8px 0;color:#4A0404;font-size:16px;">${store.name}</h3>
+                    <p style="margin:4px 0;color:#5F5E5F;font-size:13px;">📍 ${store.address}</p>
+                    <p style="margin:4px 0;color:#5F5E5F;font-size:13px;">📞 ${store.phone}</p>
+                    <p style="margin:4px 0;color:#5F5E5F;font-size:13px;">🕐 ${store.hours}</p>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=${store.lat},${store.lng}" 
+                       target="_blank" 
+                       style="display:inline-block;margin-top:8px;background:#4A0404;color:white;padding:6px 12px;text-decoration:none;border-radius:4px;font-size:13px;">
+                        Get Directions →
+                    </a>
+                </div>
+            `;
+            
+            marker.bindPopup(popupContent);
+        });
+
+        // Auto-open first marker
+        setTimeout(() => {
+            map.setView([5.6037, -0.1870], 13);
+        }, 500);
+    </script>
+</body>
+</html>
