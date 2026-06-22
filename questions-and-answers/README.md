@@ -121,3 +121,4 @@ For issues not covered in this documentation, check:
 ---
 
 **Last Updated**: June 14, 2026
+move the cart icon 

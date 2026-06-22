@@ -34,8 +34,10 @@ export const formatDeliveryMessage = (order, deliveryInfo) => {
     .map((item) => `• ${item.product_name || 'Product'} x${item.quantity}`)
     .join('\n');
 
-  // Create Google Maps link
-  const mapsLink = `https://maps.google.com/?q=${latitude},${longitude}`;
+  // Create Google Maps link (use coordinates if available, else text search)
+  const mapsLink = (latitude && longitude)
+    ? `https://maps.google.com/?q=${latitude},${longitude}`
+    : `https://maps.google.com/search?q=${encodeURIComponent(address)}`;
 
   // Build message
   const message = `🚚 *NEW DELIVERY - Osebo-Shoes*

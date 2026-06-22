@@ -5,27 +5,27 @@ import { supabase } from '../lib/supabase';
 const FALLBACK_BANNERS = [
   {
     id: 'f1',
-    title: 'New Season Arrivals',
-    subtitle: 'Fresh designs from Nike, Adidas & more',
-    image_url: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600',
-    promo_label: 'NEW',
-    label_color: '#10B981',
+    title: 'Luxury Autumn Collection',
+    subtitle: 'Luxury footwear for every occasion',
+    image_url: 'https://images.unsplash.com/photo-1543163521-1bf539e0cf6d?auto=format&fit=crop&w=900&q=80',
+    promo_label: 'HOT DEAL',
+    label_color: '#F59E0B',
   },
   {
     id: 'f2',
     title: 'Premium Sneaker Sale',
     subtitle: 'Up to 30% off selected styles this week',
-    image_url: 'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9ff?w=600',
+    image_url: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=900&q=80',
     promo_label: 'SALE 30%',
     label_color: '#EF4444',
   },
   {
     id: 'f3',
-    title: 'Designer Heels',
-    subtitle: 'Luxury footwear for every occasion',
-    image_url: 'https://images.unsplash.com/photo-1543163521-1bf539e0cf6d?w=600',
-    promo_label: 'HOT DEAL',
-    label_color: '#F59E0B',
+    title: 'New Season Arrivals',
+    subtitle: 'Fresh designs from Nike, Adidas & more',
+    image_url: 'https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9ff?auto=format&fit=crop&w=900&q=80',
+    promo_label: 'NEW',
+    label_color: '#10B981',
   },
 ];
 
@@ -53,10 +53,10 @@ export default function PromoBannerStrip({ onBannerPress }) {
 
   const fetchPromoBanners = async () => {
     try {
+      // Fetch ALL rows — no is_active filter
       const { data, error } = await supabase
         .from('promotional_banners')
         .select('*')
-        .eq('is_active', true)
         .order('display_position', { ascending: true });
 
       if (error) throw error;

@@ -34,14 +34,8 @@ const SendToDriverButton = ({ order, deliveryInfo, driverPhone: initialDriverPho
       return;
     }
 
-    // Check if delivery info has coordinates
-    if (!deliveryInfo || !deliveryInfo.latitude || !deliveryInfo.longitude) {
-      Alert.alert(
-        'Missing Location',
-        'Please enter the delivery address first and calculate the route.'
-      );
-      return;
-    }
+    // If no GPS coords, we still allow sending with just the address text
+    // (the whatsappHelper will use a text search link instead)
 
     setIsSending(true);
 
@@ -94,7 +88,7 @@ const SendToDriverButton = ({ order, deliveryInfo, driverPhone: initialDriverPho
       >
         <FontAwesome5 name="whatsapp" size={18} color="#FFFFFF" />
         <Text style={styles.buttonText}>
-          {isSending ? 'Opening WhatsApp...' : 'Send to Driver via WhatsApp'}
+          {isSending ? 'Opening...' : 'Send to Driver'}
         </Text>
       </Pressable>
 
@@ -167,6 +161,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     gap: 10,
     marginVertical: 8,
+    maxWidth: 280,
   },
   buttonDisabled: {
     backgroundColor: '#93C5A9',

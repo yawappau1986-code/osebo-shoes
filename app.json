@@ -1,27 +1,55 @@
 {
   "expo": {
-    "name": "StepVault",
-    "slug": "StepVault",
+    "name": "Osebo-Shoes",
+    "slug": "osebo-shoes",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
+    "scheme": "osebo-shoes",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#4A0404"
+    },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.osebo.shoes",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSPhotoLibraryUsageDescription": "Allow Osebo-Shoes to access your photos.",
+        "NSCameraUsageDescription": "Allow Osebo-Shoes to use your camera."
+      }
     },
     "android": {
+      "package": "com.osebo.shoes",
+      "versionCode": 1,
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
+        "backgroundColor": "#4A0404",
         "foregroundImage": "./assets/android-icon-foreground.png",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
-      }
+      },
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "INTERNET"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png",
-      "name": "StepVault",
-      "shortName": "StepVault",
-      "description": "Johnny's Food And Meat Complex — Premium Branded Footwear"
-    }
+      "name": "Osebo-Shoes",
+      "shortName": "Osebo",
+      "description": "Premium footwear for every occasion. Shop the finest shoes, sneakers and sandals at Osebo-Shoes."
+    },
+    "extra": {
+      "eas": {
+        "projectId": "YOUR_EAS_PROJECT_ID"
+      }
+    },
+    "plugins": [
+      "expo-font"
+    ]
   }
 }

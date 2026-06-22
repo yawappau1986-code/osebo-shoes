@@ -27,7 +27,17 @@ const palette = {
   vault: '#202222',
 };
 
-export default function ProductDetail({ product, visible, onClose, onAddToCart, onSetCartQuantity, cartItems = [] }) {
+const darkPalette = {
+  background: '#121212',
+  surface: '#1E1E1E',
+  charcoal: '#E8EAED',
+  secondary: '#B0B0B0',
+  oxblood: '#D26A5F',
+  oxbloodSoft: '#FF8A80',
+  vault: '#000000',
+};
+
+export default function ProductDetail({ product, visible, onClose, onAddToCart, onSetCartQuantity, cartItems = [], isUserDarkMode }) {
   const { width, height } = useWindowDimensions();
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [quantity, setQuantity] = useState(1);
@@ -180,16 +190,19 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart, 
       onRequestClose={onClose}
       presentationStyle="pageSheet"
     >
-      <SafeAreaView style={styles.safeArea}>
+      <SafeAreaView style={[styles.safeArea, { backgroundColor: isUserDarkMode ? darkPalette.background : palette.background }]}>
         <View style={styles.container}>
           {/* Header */}
-          <View style={styles.header}>
+          <View style={[styles.header, {
+            backgroundColor: isUserDarkMode ? darkPalette.surface : palette.surface,
+            borderBottomColor: isUserDarkMode ? '#333' : '#E5E5E5'
+          }]}>
             <Pressable onPress={onClose} style={styles.closeButton}>
-              <FontAwesome name="arrow-left" size={24} color={palette.charcoal} />
+              <FontAwesome name="arrow-left" size={24} color={isUserDarkMode ? darkPalette.charcoal : palette.charcoal} />
             </Pressable>
-            <Text style={styles.headerTitle}>Product Details</Text>
+            <Text style={[styles.headerTitle, { color: isUserDarkMode ? darkPalette.charcoal : palette.charcoal }]}>Product Details</Text>
             <Pressable onPress={handleShare} style={styles.shareButton}>
-              <FontAwesome name="share-alt" size={20} color={palette.charcoal} />
+              <FontAwesome name="share-alt" size={20} color={isUserDarkMode ? darkPalette.charcoal : palette.charcoal} />
             </Pressable>
           </View>
 
@@ -273,21 +286,21 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart, 
             </View>
 
             {/* Product Info */}
-            <View style={styles.infoContainer}>
+            <View style={[styles.infoContainer, { backgroundColor: isUserDarkMode ? darkPalette.background : palette.background }]}>
               {product.tag && (
-                <View style={styles.tagContainer}>
+                <View style={[styles.tagContainer, { backgroundColor: isUserDarkMode ? darkPalette.oxblood : palette.oxblood }]}>
                   <Text style={styles.tagText}>{product.tag}</Text>
                 </View>
               )}
 
-              <Text style={styles.productName}>{product.name}</Text>
+              <Text style={[styles.productName, { color: isUserDarkMode ? darkPalette.charcoal : palette.charcoal }]}>{product.name}</Text>
 
-              <Text style={styles.price}>
+              <Text style={[styles.price, { color: isUserDarkMode ? darkPalette.oxblood : palette.oxblood }]}>
                 GHC {typeof product.price === 'number' ? product.price.toFixed(2) : product.price}
               </Text>
 
               {product.stock_quantity !== undefined && product.stock_quantity !== null && (
-                <Text style={styles.stock}>
+                <Text style={[styles.stock, { color: isUserDarkMode ? darkPalette.secondary : palette.secondary }]}>
                   {product.stock_quantity > 0 
                     ? `${product.stock_quantity} in stock`
                     : 'Out of stock'}
@@ -296,22 +309,22 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart, 
 
               {product.description && (
                 <View style={styles.descriptionContainer}>
-                  <Text style={styles.sectionTitle}>Description</Text>
-                  <Text style={styles.description}>{product.description}</Text>
+                  <Text style={[styles.sectionTitle, { color: isUserDarkMode ? darkPalette.charcoal : palette.charcoal }]}>Description</Text>
+                  <Text style={[styles.description, { color: isUserDarkMode ? darkPalette.secondary : palette.secondary }]}>{product.description}</Text>
                 </View>
               )}
 
               {product.categoryLabel && (
                 <View style={styles.categoryContainer}>
-                  <Text style={styles.sectionTitle}>Category</Text>
-                  <Text style={styles.categoryText}>{product.categoryLabel}</Text>
+                  <Text style={[styles.sectionTitle, { color: isUserDarkMode ? darkPalette.charcoal : palette.charcoal }]}>Category</Text>
+                  <Text style={[styles.categoryText, { color: isUserDarkMode ? darkPalette.charcoal : palette.charcoal }]}>{product.categoryLabel}</Text>
                 </View>
               )}
 
               {/* Weight Selection (if applicable) */}
               {product.hasWeights && (
                 <View style={styles.weightSelectionContainer}>
-                  <Text style={styles.sectionTitle}>Select Size</Text>
+                  <Text style={[styles.sectionTitle, { color: isUserDarkMode ? darkPalette.charcoal : palette.charcoal }]}>Select Size</Text>
                   <View style={styles.weightOptionsRow}>
                     {weightOptions.map((option) => {
                       const active = option === selectedWeight;
@@ -319,16 +332,27 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart, 
                         <Pressable
                           key={option}
                           onPress={() => setSelectedWeight(option)}
-                          style={[styles.weightOption, active && styles.weightOptionActive]}
+                          style={[
+                            styles.weightOption, 
+                            active && styles.weightOptionActive,
+                            !active && isUserDarkMode && {
+                              borderColor: '#444',
+                              backgroundColor: darkPalette.surface
+                            }
+                          ]}
                         >
-                          <Text style={[styles.weightOptionText, active && styles.weightOptionTextActive]}>
+                          <Text style={[
+                            styles.weightOptionText, 
+                            active && styles.weightOptionTextActive,
+                            !active && isUserDarkMode && { color: darkPalette.secondary }
+                          ]}>
                             {option}
                           </Text>
                         </Pressable>
                       );
                     })}
                   </View>
-                  <Text style={styles.pricePerUnit}>
+                  <Text style={[styles.pricePerUnit, { color: isUserDarkMode ? darkPalette.secondary : palette.secondary }]}>
                     {selectedWeight === 'US 7' && 'Price for 250g'}
                     {selectedWeight === 'US 8' && 'Price for 500g'}
                     {(selectedWeight === 'US 9' || selectedWeight === 'US 10' || selectedWeight === 'US 11') && 'Price for 1kg'}
@@ -338,14 +362,15 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart, 
 
               {/* Quantity Selection */}
               <View style={styles.quantityContainer}>
-                <Text style={styles.sectionTitle}>Quantity</Text>
+                <Text style={[styles.sectionTitle, { color: isUserDarkMode ? darkPalette.charcoal : palette.charcoal }]}>Quantity</Text>
                 
                 {!showQuantityControls ? (
                   /* Add to Cart Button - Shows initially */
                   <Pressable
                     style={[
                       styles.initialAddToCartButton,
-                      product.stock_quantity === 0 && styles.initialAddToCartButtonDisabled
+                      product.stock_quantity === 0 && styles.initialAddToCartButtonDisabled,
+                      { backgroundColor: isUserDarkMode ? darkPalette.oxblood : palette.oxblood }
                     ]}
                     onPress={handleAddToCartClick}
                     disabled={product.stock_quantity === 0}
@@ -362,23 +387,36 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart, 
                   <View style={styles.quantityControls}>
                     <Pressable 
                       onPress={decrementQuantity} 
-                      style={[styles.quantityButton, quantity <= 1 && styles.quantityButtonDisabled]}
+                      style={[
+                        styles.quantityButton, 
+                        quantity <= 1 && styles.quantityButtonDisabled,
+                        isUserDarkMode && {
+                          backgroundColor: darkPalette.surface,
+                          borderColor: '#444'
+                        }
+                      ]}
                       disabled={quantity <= 1}
                     >
-                      <FontAwesome name="minus" size={16} color={quantity <= 1 ? '#CCC' : palette.charcoal} />
+                      <FontAwesome name="minus" size={16} color={quantity <= 1 ? '#CCC' : (isUserDarkMode ? darkPalette.charcoal : palette.charcoal)} />
                     </Pressable>
-                    <Text style={styles.quantityText}>{quantity}</Text>
+                    <Text style={[styles.quantityText, { color: isUserDarkMode ? darkPalette.charcoal : palette.charcoal }]}>{quantity}</Text>
                     <Pressable 
                       onPress={incrementQuantity} 
-                      style={styles.quantityButton}
+                      style={[
+                        styles.quantityButton,
+                        isUserDarkMode && {
+                          backgroundColor: darkPalette.surface,
+                          borderColor: '#444'
+                        }
+                      ]}
                     >
-                      <FontAwesome name="plus" size={16} color={palette.charcoal} />
+                      <FontAwesome name="plus" size={16} color={isUserDarkMode ? darkPalette.charcoal : palette.charcoal} />
                     </Pressable>
                   </View>
                 )}
                 
                 {product.stock_quantity !== undefined && product.stock_quantity !== null && (
-                  <Text style={styles.stockInfo}>
+                  <Text style={[styles.stockInfo, { color: isUserDarkMode ? darkPalette.secondary : palette.secondary }]}>
                     {product.stock_quantity > 0 
                       ? `${product.stock_quantity} available`
                       : 'Out of stock'}
@@ -387,19 +425,25 @@ export default function ProductDetail({ product, visible, onClose, onAddToCart, 
               </View>
 
               {/* Total Price Display */}
-              <View style={styles.totalPriceContainer}>
-                <Text style={styles.totalPriceLabel}>Total Price:</Text>
-                <Text style={styles.totalPrice}>GHC {totalPrice.toFixed(2)}</Text>
+              <View style={[styles.totalPriceContainer, {
+                backgroundColor: isUserDarkMode ? darkPalette.surface : '#F5F5F5'
+              }]}>
+                <Text style={[styles.totalPriceLabel, { color: isUserDarkMode ? darkPalette.charcoal : palette.charcoal }]}>Total Price:</Text>
+                <Text style={[styles.totalPrice, { color: isUserDarkMode ? darkPalette.oxblood : palette.oxblood }]}>GHC {totalPrice.toFixed(2)}</Text>
               </View>
             </View>
           </ScrollView>
 
           {/* Add to Cart Button */}
-          <View style={styles.footer}>
+          <View style={[styles.footer, {
+            backgroundColor: isUserDarkMode ? darkPalette.surface : palette.surface,
+            borderTopColor: isUserDarkMode ? '#333' : '#E5E5E5'
+          }]}>
             <Pressable
               style={[
                 styles.addToCartButton,
-                (!showQuantityControls || product.stock_quantity === 0) && styles.addToCartButtonDisabled
+                (!showQuantityControls || product.stock_quantity === 0) && styles.addToCartButtonDisabled,
+                { backgroundColor: isUserDarkMode ? darkPalette.oxblood : palette.oxblood }
               ]}
               onPress={() => {
                 if (!showQuantityControls) {
